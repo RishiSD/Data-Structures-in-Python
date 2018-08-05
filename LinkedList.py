@@ -132,6 +132,8 @@ class LinkedList(object):
 		"""	
 		current = self.head
 		counter = 1
+		if position < 1:
+			raise IndexError
 		while current and position != counter:
 			current = current.next
 			counter += 1
