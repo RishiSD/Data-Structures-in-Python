@@ -35,8 +35,18 @@ class LinkedList(object):
 			head  : Object reference to the first Node in the LinkedList.
 		"""
 		self.head = head
+
+	def push_front(self, node):
+		"""
+		The funtion to push a node at the beginning of the LinkedList.
 		
-	def append(self, node):
+		Parameters:
+			node  : Node to push at the beginning of LinkedList.
+		"""		
+		node.next = self.head
+		self.head = node		
+		
+	def push_back(self, node):
 		"""
 		The funtion to append a node in the LinkedList.
 		
@@ -46,11 +56,46 @@ class LinkedList(object):
 		current = self.head
 		if current:
 			while current.next:
-				curren = curren.next
+				current = current.next
 			current.next = node
 		else:
 			self.head = node
+
+	def pop_front(self):
+		"""
+		The funtion to pop node at the beginning of the LinkedList.
+		
+		Returns :
+			poped_node : Node at the beginning of the LinkedList.
+		"""
+		if not self.head:
+			return None
+		poped_node = self.head
+		self.head = poped_node.next
+		poped_node.next = None
+		return 	poped_node
 			
+	def pop_back(self):
+		"""
+		The funtion to pop node at the end of the LinkedList.
+		
+		Returns :
+			poped_node : Node at the end of the LinkedList.
+		"""
+		if not self.head:
+			return None
+		current = self.head
+		previous = None
+		while current.next:
+			previous = current
+			current = current.next
+		if current:
+			if previous:
+				previous.next = None
+			else:
+				self.head = None
+			return current
+		
 	def print_list(self):
 		"""
 		The funtion prints the Node values in the LinkedList.
