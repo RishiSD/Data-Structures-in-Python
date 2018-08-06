@@ -74,7 +74,36 @@ class LinkedList(object):
 		self.head = poped_node.next
 		poped_node.next = None
 		return 	poped_node
-			
+
+	def trace_back(self):
+		"""
+		The function traces back to the last Node in the LinkedList.
+		
+		Returns:
+			current : Last Node of the LinkedList.
+			previous : Second last Node in the LinkedList if present.
+		"""
+		current = self.head
+		previous = None
+		while current.next:
+			previous = current
+			current = current.next
+		return previous, current		
+
+	def peek_back(self):
+		"""
+		The function returns the value of the last element in the LinkedList.
+		
+		Returns:
+			value : Value of the last node in the LinkedList.
+		"""
+		if not self.head:
+			return None
+		previous, current = self.trace_back()
+		if current:
+			return current.value
+		return None
+		
 	def pop_back(self):
 		"""
 		The funtion to pop node at the end of the LinkedList.
@@ -84,11 +113,7 @@ class LinkedList(object):
 		"""
 		if not self.head:
 			return None
-		current = self.head
-		previous = None
-		while current.next:
-			previous = current
-			current = current.next
+		previous, current = self.trace_back()
 		if current:
 			if previous:
 				previous.next = None
@@ -173,6 +198,9 @@ class LinkedList(object):
 		Returns:
 			value : Value for Node at the given position.	
 		"""	
+		if not self.head:
+			return None
+			
 		current = self.head
 		counter = 1
 
